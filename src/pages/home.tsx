@@ -1,8 +1,20 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { RootPage } from "./root"
+import { getBalance } from "../api"
+
 import "./styles.scss"
 
 export const HomePage: React.FC = props => {
+	useEffect(() => {
+		getBalance("DAI")
+			.then(balance => {
+				console.log(balance)
+			})
+			.catch(err => {
+				console.log(err)
+			})
+	}, [])
+
 	return (
 		<RootPage header='Home' cn='home'>
 			<header className='page-header'>Balance Tracker</header>
