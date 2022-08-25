@@ -1,6 +1,45 @@
+@import "../constants/variables.scss";
+
 .home {
     .page-header{
         font-size: 1.8rem;
         font-weight: 600;
+    }
+
+    .content {
+        margin-top: 1rem;
+        .btn-group{
+            display: flex;
+            gap: 1rem;
+
+            button{
+                border: none;
+                background: $btn-color-light;
+                padding: 10px 25px;
+                text-transform: uppercase;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+        }
+
+        .tbl-bal{
+            margin-top: 2rem;
+            border-collapse: collapse;
+            width: 100%;
+            border-spacing: 0;
+            border: 1px solid #bdbdbd;
+            background: $primary-light;
+            tr{
+                border-bottom: 1px solid #bdbdbd;
+                td, th{
+                    padding: 10px;
+                    text-align: left;
+                }
+            }
+
+            .dark &{
+                background: $primary-dark;
+            }
+        }
     }
 }

@@ -1,10 +1,20 @@
-.main-wrapper{
-    background-color: #f5f5f5;
-}
+@import './constants/_variables.scss';
 
-#app{
-    width: 90%; 
-    max-width: 1080px;
-    margin: auto;
-    padding-top: 1rem;
+.main-wrapper{
+    background-color: $bg-light;
+    color: $font-light;
+
+    #app{
+        width: 90%; 
+        max-width: 1080px;
+        margin: auto;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        height: 100vh;
+    }
+
+    .dark &{
+        background-color: $bg-dark;
+        color: $font-dark;
+    }
 }
