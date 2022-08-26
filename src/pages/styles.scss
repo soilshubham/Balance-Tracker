@@ -1,4 +1,4 @@
-@import "../constants/variables.scss";
+@import "../common/variables.scss";
 
 .home {
     .page-header{
@@ -19,6 +19,11 @@
                 text-transform: uppercase;
                 cursor: pointer;
                 border-radius: 5px;
+
+                &:disabled{
+                    background-color: rgba(255, 186, 95, 0.832);
+                    cursor: not-allowed;
+                }
             }
         }
 
@@ -34,12 +39,152 @@
                 td, th{
                     padding: 10px;
                     text-align: left;
+                    max-width: 100px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
                 }
             }
 
             .dark &{
                 background: $primary-dark;
             }
+
+            @media only screen and (max-width: 760px), 
+            (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+
+                td, th{
+                    box-sizing: border-box;
+                    // max-width: unset !important;
+                    min-width: 100%;
+                    // overflow: scroll !important;
+                    text-overflow: unset !important;
+                    white-space: unset !important;
+                    word-wrap: break-word;
+                }
+
+                thead, tbody, th, td, tr { 
+                    display: block; 
+                }
+
+                thead tr { 
+                    position: absolute;
+                    top: -9999px;
+                    left: -9999px;
+                }
+
+                tr{
+                    padding-top: 8px;
+                    padding-bottom: 8px;
+                }
+
+                td { 
+                    /* Behave  like a "row" */
+                    border: none;
+                    border-bottom: 1px solid #eee; 
+                    position: relative;
+                    padding-left: 28% !important; 
+                    white-space: normal;
+                    text-align:left;
+                }
+
+                td:before { 
+                    /* Now like a table header */
+                    position: absolute;
+                    /* Top/left values mimic padding */
+                    // top: 6px;
+                    left: 12px;
+                    // width: 45%; 
+                    padding-right: 8px; 
+                    white-space: nowrap;
+                    text-align:left;
+                    font-weight: bold;
+                }
+                
+                /*
+                Label the data
+                */
+                td:nth-of-type(1):before { content: "Address"; }
+                td:nth-of-type(2):before { content: "DAI"; }
+                td:nth-of-type(3):before { content: "USDT"; }
+                td:nth-of-type(4):before { content: "LINK"; }
+            }
+        }
+    }
+}
+
+.modal-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    padding-top: 5rem;
+
+    .modal{
+        background-color: #fff;
+        width: 90%;
+        max-width: 500px;
+        height: max-content;
+        border-radius: 5px;
+        padding: 1.8rem;
+
+        .modal-header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .title{
+                font-size: 1.5rem;
+                font-weight: 700;
+            }
+
+            button{
+                border: none;
+                background: transparent;
+                font-size: 1.3rem;
+                height: 30px;
+                width: 30px;
+                cursor: pointer;
+            }
+        }
+
+        .modal-body{
+            .inpt-address{
+                box-sizing: border-box;
+                width: 100%;
+                border: 1px solid #bdbdbd;
+                border-radius: 5px;
+                padding: 15px;
+                font-size: 1.1rem;
+                outline: none;
+                resize: none;
+                margin-bottom: 1rem;
+                margin-top: 1rem;
+            
+            }
+
+            button {
+                border: none;
+                background: $btn-color-light;
+                padding: 15px 25px;
+                text-transform: uppercase;
+                cursor: pointer;
+                border-radius: 5px;
+                width: 100%;
+                font-size: 1rem;
+                font-weight: 500;
+            }
+        }
+
+        @media screen and (max-width: 768px){
+            padding: 1.5rem;
+            
         }
     }
 }
