@@ -1,34 +1,47 @@
 import { ethers } from "ethers";
 import ERC20ABI from './abi.json';
+import TOKEN_ADDRESS from './token_address.json';
+import { BalanceObject } from "../common/types";
 
-const mainnet = process.env.TEST_NET;
-const walletAddress = "0x4f0d6e68eebade804932c67fb2ee074a02379666";
+// const testnet = process.env.REACT_APP_TESTNET_URL;
+const testnet = "localhost:8545";
 
-// interface tokenType {
-//     DAI: string,
-//     USDT: string,
-//     LINK: string,
-// }
+const provider = new ethers.providers.JsonRpcProvider(testnet)
 
-// const contractAddress: tokenType = {
-//     DAI: "0x6B175474E89094C44Da98b954EedeAC495271d0F",
-//     USDT: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
-//     LINK: "0x514910771AF9Ca656af840dff83E8264EcF986CA",
-// }
+// "0x4f0d6e68eebade804932c67fb2ee074a02379666"
+// "0xdca5db89a1e06cde5b57ae56c6ba04d9db3a10dc"
 
-const provider = new ethers.providers.JsonRpcProvider(mainnet)
+const daiContract = new ethers.Contract(TOKEN_ADDRESS.DAI, ERC20ABI, provider);
+const usdtContract = new ethers.Contract(TOKEN_ADDRESS.USDT, ERC20ABI, provider);
+const linkContract = new ethers.Contract(TOKEN_ADDRESS.LINK, ERC20ABI, provider);
 
-const getBalance = async (tokenName?: string) : Promise<string> => {
+// interface BalanceReturnType {}
+
+const getBalance = async (walletAddresses: string[]) : Promise<BalanceObject[] | undefined> => {
     try{
+        
+        const balances : BalanceObject[] = []; 
+        console.log(walletAddresses);
 
-        const contract = new ethers.Contract("0xE68104D83e647b7c1C15a91a8D8aAD21a51B3B3E", ERC20ABI, provider);
-        const balance = await contract.balanceOf(walletAddress);
-        console.log(balance);
-        return ethers.utils.formatEther(balance);
+        for(let i=0 ; i<walletAddresses.length ; i++){
+            
+            const daiBal = await daiContract.balanceOf(walletAddresses[i]);
+            const usdtBal = await usdtContract.balanceOf(walletAddresses[i]);
+            const linkBal = await linkContract.balanceOf(walletAddresses[i]);
+    
+            const balance : BalanceObject = {
+                DAI: ethers.utils.formatEther(daiBal),
+                USDT: ethers.utils.formatEther(usdtBal),
+                LINK: ethers.utils.formatEther(linkBal),
+            }
+
+            balances.push(balance);
+        }
+        console.log(balances);
+        return balances;
     }
     catch(error){
         console.log(error);
-        return "012"
     }
 }
 
