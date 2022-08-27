@@ -10,7 +10,7 @@ export const HomePage: React.FC = props => {
 	const [inpAddress, setInpAddress] = useState("")
 	const [addressList, setAddressList] = useState<string[]>([])
 
-	const intervalTime = 20000
+	const intervalTime = 30000
 
 	const handelAddAddress = (e: any): void => {
 		e.preventDefault()
@@ -38,15 +38,13 @@ export const HomePage: React.FC = props => {
 			const localList = JSON.parse(
 				localStorage.getItem("addressList") as string
 			)
+			// const localList: string[] = []
 			setAddressList(localList)
 		}
 	}
 
-	useEffect(() => {
-		loadAddressList()
-	}, [])
-
-	useEffect(() => {
+	const loadBalances = (): void => {
+		console.log("hello")
 		if (addressList !== undefined && addressList.length > 0) {
 			getBalance(addressList)
 				.then(balance => {
@@ -56,8 +54,16 @@ export const HomePage: React.FC = props => {
 					console.log(err)
 				})
 		}
+	}
+
+	useEffect(() => {
+		loadAddressList()
+	}, [])
+
+	useEffect(() => {
+		loadBalances()
 		const interval = setInterval(() => {
-			console.log("Logs every minute")
+			loadBalances()
 		}, intervalTime)
 
 		return () => clearInterval(interval)
@@ -107,54 +113,69 @@ export const HomePage: React.FC = props => {
 						<thead>
 							<tr>
 								<th>Address</th>
-								<th>ETH</th>
 								<th>DAI</th>
 								<th>USDT</th>
+								<th>LINK</th>
 							</tr>
 						</thead>
 						<tbody>
-							{/* {tokenBalances != null
+							{(addressList.length === 0 ||
+								addressList === undefined) && (
+								<tr>
+									<td>No Address Added</td>
+								</tr>
+							)}
+							{tokenBalances != null
 								? tokenBalances?.map((bal, indx) => {
 										return (
 											<tr key={indx}>
-												<td>{addressList[indx]}</td>
-												<td>
-													{tokenBalances[indx]?.DAI}
+												<td className='adrs'>
+													{addressList[indx]}
 												</td>
-												<td>
-													{tokenBalances[indx]?.USDT}
-												</td>
-												<td>
-													{tokenBalances[indx]?.LINK}
-												</td>
+												<td>{bal?.DAI}</td>
+												<td>{bal?.USDT}</td>
+												<td>{bal?.LINK}</td>
 											</tr>
 										)
 								  })
-								: null} */}
+								: addressList.map((adrs, indx) => (
+										<tr key={indx} className='loading'>
+											<td className='adrs'>{adrs}</td>
+											<td>
+												<div className='dot-flashing'></div>
+											</td>
+											<td>
+												<div className='dot-flashing'></div>
+											</td>
+											<td>
+												<div className='dot-flashing'></div>
+											</td>
+										</tr>
+								  ))}
+							{/* <tr>
+								<td className='adrs'>
+									0xdca5db89a1e06cde5b57ae56c6ba04d9db3a10dc
+								</td>
+								<td>10000000000000.0</td>
+								<td>0</td>
+								<td>0</td>
+							</tr>
 							<tr>
-								<td>
+								<td className='adrs'>
 									0x4f0d6e68eebade804932c67fb2ee074a02379666
 								</td>
-								<td>10000000000000000.0000000000</td>
 								<td>0</td>
-								<td>0</td>
-							</tr>
-							<tr>
-								<td>
-									0x2f45ghj6ekkbade804932c67fb2ee074a02376374
-								</td>
-								<td>0</td>
-								<td>546738272.000000000000</td>
+								<td>465235079.2155068493155557</td>
 								<td>0</td>
 							</tr>
 							<tr>
-								<td>
-									0x2f45ghj6ekkbade804932c67fb2ee074a02376374
+								<td className='adrs'>
+									0x4f0d6e68eebade804932c67fb2ee074a02379666
 								</td>
 								<td>0</td>
 								<td>0</td>
-								<td>546738272.000000000000</td>
-							</tr>
+								<td>465235079.2155068493155557</td>
+							</tr> */}
 						</tbody>
 					</table>
 				</main>
