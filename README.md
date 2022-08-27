@@ -38,7 +38,9 @@ $ npm install
 ```bash
 npm start
 ```
-🌟 You are all set!
+Open "localhost:3000"on your browser
+
+### 🌟 You are all set!
 
 ## Snapshots
 ![image](https://user-images.githubusercontent.com/54865101/187016092-babd6848-76f4-46f6-96db-d4a1eb4dc69c.png)
