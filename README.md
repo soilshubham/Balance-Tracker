@@ -40,6 +40,8 @@ npm start
 ```
 🌟 You are all set!
 
+## Snapshots
+![image](https://user-images.githubusercontent.com/54865101/187016092-babd6848-76f4-46f6-96db-d4a1eb4dc69c.png)
 
 ## Contributors
 <table><tr><td align="center"><a href="https://linktr.ee/soilshubham"><img src="https://avatars.githubusercontent.com/u/54865101?v=4" width="80px;" alt="Sahil Shubham"/><br /><sub><b>Sahil Shubham</b></sub></a><br /></td></table>
