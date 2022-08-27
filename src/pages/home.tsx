@@ -68,36 +68,41 @@ export const HomePage: React.FC = props => {
 
 	return (
 		<>
-			{/* Modal to add new address */}
-			{addAddressModal && (
-				<div className='modal-overlay'>
-					<div className='modal'>
-						<div className='modal-header'>
-							<span className='title'>Add Address</span>
-							<button onClick={() => setAddAddressModal(false)}>
-								X
-							</button>
-						</div>
-						<div className='modal-body'>
-							<p>
-								Enter the address you want to add to your wallet
-							</p>
-							<input
-								type='text'
-								className='inpt-address'
-								placeholder='Wallet Address'
-								value={inpAddress}
-								onChange={e => setInpAddress(e.target.value)}
-							/>
-							<button onClick={handelAddAddress}>
-								Add Address
-							</button>
+			<RootPage header='Home' cn='home'>
+				{/* Modal to add new address */}
+				{addAddressModal && (
+					<div className='modal-overlay'>
+						<div className='modal'>
+							<div className='modal-header'>
+								<span className='title'>Add Address</span>
+								<button
+									onClick={() => setAddAddressModal(false)}
+								>
+									X
+								</button>
+							</div>
+							<div className='modal-body'>
+								<p>
+									Enter the address you want to add to your
+									wallet
+								</p>
+								<input
+									type='text'
+									className='inpt-address'
+									placeholder='Wallet Address'
+									value={inpAddress}
+									onChange={e =>
+										setInpAddress(e.target.value)
+									}
+								/>
+								<button onClick={handelAddAddress}>
+									Add Address
+								</button>
+							</div>
 						</div>
 					</div>
-				</div>
-			)}
+				)}
 
-			<RootPage header='Home' cn='home'>
 				<header className='page-header'>Balance Tracker</header>
 				<main className='content'>
 					<div className='btn-group'>

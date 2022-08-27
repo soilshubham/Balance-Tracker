@@ -103,7 +103,7 @@
                 td { 
                     /* Behave  like a "row" */
                     border: none;
-                    border-bottom: 1px solid #eee; 
+                    border-bottom: 1px solid #bdbdbd3f; 
                     position: relative;
                     padding-left: 28% !important; 
                     white-space: normal;
@@ -203,7 +203,7 @@
     padding-top: 5rem;
 
     .modal{
-        background-color: #fff;
+        background-color: $primary-light;
         width: 90%;
         max-width: 500px;
         height: max-content;
@@ -261,6 +261,29 @@
         @media screen and (max-width: 768px){
             padding: 1.5rem;
             
+        }
+    }
+
+    .dark &{
+        background: rgba(0, 0, 0, 0.66);
+
+        .modal{
+            background-color: $primary-dark;
+            color: $font-dark;
+
+            .modal-header{
+                button{
+                    color: $font-dark;
+                }
+            }
+
+            .modal-body{
+                .inpt-address{
+                    background-color: #1b1b1b;
+                    border: 1px solid #3e3e3e;
+                    color: $font-dark;
+                }
+            }
         }
     }
 }
