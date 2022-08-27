@@ -14,7 +14,6 @@ export const HomePage: React.FC = props => {
 
 	const handelAddAddress = (e: any): void => {
 		e.preventDefault()
-		console.log(tokenBalances)
 
 		if (localStorage.getItem("addressList") === null) {
 			const localList = [inpAddress]
@@ -38,13 +37,11 @@ export const HomePage: React.FC = props => {
 			const localList = JSON.parse(
 				localStorage.getItem("addressList") as string
 			)
-			// const localList: string[] = []
 			setAddressList(localList)
 		}
 	}
 
 	const loadBalances = (): void => {
-		console.log("hello")
 		if (addressList !== undefined && addressList.length > 0) {
 			getBalance(addressList)
 				.then(balance => {
@@ -71,6 +68,7 @@ export const HomePage: React.FC = props => {
 
 	return (
 		<>
+			{/* Modal to add new address */}
 			{addAddressModal && (
 				<div className='modal-overlay'>
 					<div className='modal'>
@@ -152,30 +150,6 @@ export const HomePage: React.FC = props => {
 											</td>
 										</tr>
 								  ))}
-							{/* <tr>
-								<td className='adrs'>
-									0xdca5db89a1e06cde5b57ae56c6ba04d9db3a10dc
-								</td>
-								<td>10000000000000.0</td>
-								<td>0</td>
-								<td>0</td>
-							</tr>
-							<tr>
-								<td className='adrs'>
-									0x4f0d6e68eebade804932c67fb2ee074a02379666
-								</td>
-								<td>0</td>
-								<td>465235079.2155068493155557</td>
-								<td>0</td>
-							</tr>
-							<tr>
-								<td className='adrs'>
-									0x4f0d6e68eebade804932c67fb2ee074a02379666
-								</td>
-								<td>0</td>
-								<td>0</td>
-								<td>465235079.2155068493155557</td>
-							</tr> */}
 						</tbody>
 					</table>
 				</main>

@@ -19,13 +19,12 @@ export const RootPage: React.FC<RootPageProps> = props => {
 	useEffect(() => {
 		if (localStorage.getItem("mode") !== null) {
 			const mode = localStorage.getItem("mode")
-			if (mode === "dark") {
-				setMode(mode)
-			} else if (mode === "light") {
-				setMode("light")
-			}
+
+			if (mode === "dark") setMode(mode)
+			else if (mode === "light") setMode("light")
 		}
 	}, [])
+
 	return (
 		<div className={mode}>
 			<Navbar toggle={toggleMode} mode={mode} />
