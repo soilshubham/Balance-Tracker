@@ -1,8 +1,6 @@
 <h1 align="center">ERC20 Balance Tracker</h1>
 <p align="center">
-  <a href="https://splitto-web.herokuapp.com/" target="_blank">
     <img src="https://user-images.githubusercontent.com/54865101/187015361-4e5ca58b-db2a-4e24-9788-c0f8e2624d4c.png"/>
-  </a>
 </p>
 <br>
 <p align="center">
@@ -36,7 +34,7 @@ $ npm install
     
 5. Run the project
 ```bash
-npm start
+$ npm start
 ```
 Open "localhost:3000"on your browser
 
